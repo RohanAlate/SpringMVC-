@@ -38,10 +38,10 @@ public class JobService {
 
     public  Job updateJob(int jobid,Job job)
     {
-        jobList.stream().forEach(c-> { if(c.getId() == jobid){c.setJob_title(job.getJob_title());
-            c.setJob_location(job.getJob_location());
-            c.setJob_type(job.getJob_type());}
-        });
-        return jobList.stream().filter(c->c.getId() == jobid).findFirst().get();
-    }
+        Job existingjob = jobRepository.findById(jobid).orElse(null);
+        existingjob.setJob_type(job.getJob_type());
+        existingjob.setJob_title(job.getJob_title());
+        existingjob.setJob_location(job.getJob_location());
+        return jobRepository.save(existingjob);
+    }   
 }
