@@ -13,7 +13,7 @@ import lombok.Setter;
 @Table(name="jobs")
 public class Job {
     @Id
-    private int id;
+    private Integer id;
     @Column(name="Job_title")
     private String job_title;
     @Column(name="Job_type")
