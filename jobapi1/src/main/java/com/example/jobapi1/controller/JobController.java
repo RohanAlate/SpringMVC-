@@ -35,10 +35,6 @@ public class JobController {
             return jobRepository.findAll();
         }
 
-        @GetMapping(value = "/{jobid}")
-        public Job getJob(@PathVariable("jobid") int jobid) {
-            return jobService.getJob(jobid);
-        }
     @PutMapping("{id}")
     public ResponseEntity<Job> updateJob(@PathVariable int id,@RequestBody Job JobDetails) {
         Job updateJob = jobRepository.findById(id)
