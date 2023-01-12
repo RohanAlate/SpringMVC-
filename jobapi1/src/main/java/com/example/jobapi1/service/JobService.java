@@ -38,7 +38,7 @@ public class JobService {
     }
 
     public List<Job> getJobList() {
-        return jobList;
+        return jobRepository.findAll();
     }
 
     public Job getJob(int jobid)
