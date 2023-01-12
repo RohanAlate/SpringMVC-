@@ -27,7 +27,7 @@ public class JobService {
             counter++;
         }
     }
-    private int jobidcount = 1;
+    private int jobidcount;
     private List<Job> jobList = new CopyOnWriteArrayList<>();
 
     public Job addjob(Job job){
