@@ -14,18 +14,7 @@ public class JobService {
     private JobRepository jobRepository;
     public void saveJobs(List<Job> jobs)
     {
-        int size = jobs.size();
-        int counter =0;
-        List<Job> temp = new ArrayList<>();
-        for(Job jb : jobs){
-            temp.add(jb);
-
-            if((counter+1)%500==0 || (counter+1)==size){
-                jobRepository.saveAll(temp);
-                temp.clear();
-            }
-            counter++;
-        }
+        jobRepository.saveAll(jobs);
     }
     private int jobidcount;
     private List<Job> jobList = new CopyOnWriteArrayList<>();
