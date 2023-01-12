@@ -2,12 +2,12 @@ package com.example.jobapi1.service;
 
 import com.example.jobapi1.model.Job;
 import com.example.jobapi1.repository.JobRepository;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-@Component
+@Service
 public class JobService {
     private JobRepository jobRepository;
     public void saveJobs(List<Job> jobs)
