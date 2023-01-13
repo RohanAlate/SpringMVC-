@@ -12,14 +12,15 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class JobService {
     @Autowired
     private JobRepository jobRepository;
-    public void saveJobs(List<Job> jobs)
-    {
+
+    public void saveJobs(List<Job> jobs) {
         jobRepository.saveAll(jobs);
     }
+
     private int jobidcount;
     private List<Job> jobList = new CopyOnWriteArrayList<>();
 
-    public Job addjob(Job job){
+    public Job addjob(Job job) {
         job.setId(jobidcount);
         jobList.add(job);
         jobidcount++;
@@ -30,18 +31,21 @@ public class JobService {
         return jobRepository.findAll();
     }
 
-    public Job getJob(int jobid)
-    {
+    public Job getJob(Integer jobid) {
 
         return jobList.stream().filter(c -> c.getId() == jobid).findFirst().get();
     }
 
-    public  Job updateJob(int jobid,Job job)
-    {
-        Job existingjob = jobRepository.findById(jobid).orElse(null);
+    public Job updateJob(Integer id, Job job) {
+        Job existingjob = jobRepository.findById(id).orElse(null);
         existingjob.setJob_type(job.getJob_type());
         existingjob.setJob_title(job.getJob_title());
         existingjob.setJob_location(job.getJob_location());
         return jobRepository.save(existingjob);
-    }   
+    }
+
+    public Job deleteJob(Integer id) {
+        deleteJob(id);
+        return deleteJob(id);
+    }
 }
