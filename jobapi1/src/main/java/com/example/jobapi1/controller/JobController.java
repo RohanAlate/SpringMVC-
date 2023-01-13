@@ -14,48 +14,43 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "api/v3/Jobs")
 public class JobController {
-        @Autowired
-        private JobService jobService;
-        @Autowired
-        private JobRepository jobRepository;
-        @PostMapping
-        public Job addJob(@RequestBody Job job) {
-            return jobRepository.save(job);
-        }
+    @Autowired
+    private JobService jobService;
+    @PostMapping
+    public Job addJob(@RequestBody Job job) {
+        return jobService.addjob(job);
+    }
     @PostMapping("/save")
-    public ResponseEntity<Void> saveEmployees(@RequestBody List<Job> jobs){
+    public ResponseEntity<Void> save(@RequestBody List<Job> jobs){
         jobService.saveJobs(jobs);
         System.out.println("Data saved");
         return new ResponseEntity<>(HttpStatus.OK);
 
     }
-        @GetMapping
-        public List<Job> getAllJobs()
-        {
-            return jobRepository.findAll();
-        }
+    @GetMapping
+    public List<Job> getAllJobs()
+    {
+        return jobService.getJobList();
+    }
 
     @PutMapping("{id}")
     public ResponseEntity<Job> updateJob(@PathVariable int id,@RequestBody Job JobDetails) {
-        Job updateJob = jobRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Job not exist with id: " + id));
+        Job updateJob = jobService.getJob(id);
 
         updateJob.setJob_title(JobDetails.getJob_title());
         updateJob.setJob_type(JobDetails.getJob_type());
         updateJob.setJob_location(JobDetails.getJob_location());
 
-        jobRepository.save(updateJob);
+        jobService.updateJob(id,JobDetails);
 
         return ResponseEntity.ok(updateJob);
     }
     @DeleteMapping("{id}")
     public ResponseEntity<HttpStatus> deleteJob(@PathVariable int id){
 
-        Job job = jobRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Job not exist with id: " + id));
+        Job job = jobService.getJob(id);
 
-        jobRepository.delete(job);
-
+        jobService.deleteJob(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
