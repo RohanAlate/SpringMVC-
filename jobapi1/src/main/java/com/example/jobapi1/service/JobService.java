@@ -44,8 +44,8 @@ public class JobService {
         return jobRepository.save(existingjob);
     }
 
-    public Job deleteJob(Integer id) {
-        deleteJob(id);
-        return deleteJob(id);
+    public String deleteJob(Integer id) {
+        jobRepository.deleteById(id);
+        return "Job removed !!" + id;
     }
 }
